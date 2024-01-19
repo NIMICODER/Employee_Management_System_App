@@ -1,0 +1,21 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.JSInterop
+@using Ems_UI
+@using Ems_UI.Layout
+
+
+
+@using Ems_Shared.Dtos
+@using Ems_UI_Service.Helpers
+@using Microsoft.AspNetCore.Components.Authorization
+@using Ems_UI_Service.Interfaces
+
+@inject AuthenticationStateProvider AuthStateProvider
+@inject IAuthenticationService authenticationService
+@inject NavigationManager NavManager

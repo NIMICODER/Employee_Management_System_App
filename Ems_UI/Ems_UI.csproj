@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="wwwroot\images\background\" />
+  </ItemGroup> 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ems_Base_Library\Ems_Base_Library.csproj" />
+    <ProjectReference Include="..\Ems_UI_Library\Ems_UI_Service.csproj" />
+  </ItemGroup>
+
+</Project>

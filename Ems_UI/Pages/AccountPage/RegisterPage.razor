@@ -1,0 +1,116 @@
+﻿@page "/identity/account/register"
+@using Ems_UI.Pages.OtherPages
+@using Syncfusion.Blazor.Popups
+@layout AuthenticationLayout
+@inject SfDialogService DialogService
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <EditForm Enhance Model="User" OnValidSubmit="HandleRegistration">
+                 <DataAnnotationsValidator />
+                 <div class="card bg-dark" style="opacity:0.5; margin-top:50%; border-radius:10px; color:white; font-weight:bold">
+                     <div class="card-header text-center fs-5 mb-2">Register an account</div>
+                     <div class="container">
+                         <div class="row">
+                             <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                             <div class="col-lg-4 col-md-4 col-sm-4 d-flex justify-content-center">
+                                 <img style="border-radius:28px" src="../images/companylogo.jpg" height="50" width="50" />
+                             </div>
+                             <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                         </div>
+                     </div>
+
+                     <div class="card-body">
+                         <div class="form-group mt-3">
+                             <label class="form-label">FullName</label>
+                             <InputText @bind-Value="User.FullName" class="form-control"></InputText>
+                         </div>
+
+                         <div class="form-group mt-3">
+                             <label class="form-label">Email</label>
+                             <InputText @bind-Value="User.Email" class="form-control"></InputText>
+                         </div>
+
+                         <div class="form-group mt-3">
+                             <label class="form-label">Password</label>
+                             <input type="password" @bind="User.Password" class="form-control"></input>
+                         </div>
+                         <div class="form-group mt-3">
+                             <label class="form-label">Confirm Password</label>
+                             <input type="password" @bind="User.ConfirmPassword" class="form-control"></input>
+                         </div>
+
+                         <div class="form-group mt-3">
+                             @if (ShowLoadingButton)
+                            {
+                                <Spinner></Spinner>
+                            }
+                            else
+                            {
+                                <button class="bt btn-outline-primary float-end" type="submit">Register</button>
+                            }
+                           
+                         </div>
+
+                     </div>
+
+                     <div class="card-footer">
+                         <span class="text-center">
+                             Have account already?
+                             <a class="btn-link" href="identity/account/login">Sign In</a>
+                         </span>
+                         <ValidationSummary />
+                     </div>
+
+                 </div>
+             </EditForm>
+         </div>
+
+         <div class="col-lg-4"></div>
+     </div>
+ </div>
+
+@code{
+    public bool ShowLoadingButton { get; set; } = false;
+    Register User = new();
+
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationState { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        await CheckUserAuthentication();
+    }
+
+    async Task HandleRegistration(){
+
+        ShowLoadingButton = true;
+        var result = await authenticationService.CreateAccountAsync(User);
+        if (result.Status)
+        {
+            await DisplayDialog(result.Message, "Success");
+            User = new(); 
+        }
+        else
+        {
+            await DisplayDialog(result.Message, "Alert!");
+        }
+        ShowLoadingButton = false;
+    }
+
+    private async Task DisplayDialog(string contennt, string title)
+    {
+        await DialogService.AlertAsync(contennt, title);
+    }
+
+    private async Task CheckUserAuthentication()
+    {
+        var user = (await AuthenticationState).User;
+        bool isUserAuthenticated = user.Identity!.IsAuthenticated;
+        if (isUserAuthenticated)
+            NavManager.NavigateTo("/home/dashboard");
+    }
+}
+

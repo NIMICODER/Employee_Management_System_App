@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="Syncfusion.Blazor.Buttons" Version="24.1.46" />
+    <PackageReference Include="Syncfusion.Blazor.Popups" Version="24.1.46" />
+    <PackageReference Include="Syncfusion.Blazor.Themes" Version="24.1.46" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ems_Shared\Ems_Shared.csproj" />
+  </ItemGroup>
+
+</Project>

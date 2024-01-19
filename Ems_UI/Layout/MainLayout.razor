@@ -1,0 +1,35 @@
+﻿@using Ems_UI.Pages.OtherPages
+@using Microsoft.AspNetCore.Authorization
+@inherits LayoutComponentBase
+@attribute [Authorize]
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+           <ProfileDropdown></ProfileDropdown>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+<Syncfusion.Blazor.Popups.SfDialogProvider/>
+
+@code{
+
+    async Task LogoutClicked()
+    {
+        var logoutModel = new UserSession();
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
+        await customAuthStateProvider.UpdateAuthenticationState(logoutModel);
+        NavManager.NavigateTo("/", forceLoad: true);
+    }
+
+
+}
